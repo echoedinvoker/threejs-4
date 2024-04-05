@@ -1,5 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
+import gsap from "gsap";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
@@ -96,7 +97,7 @@ gltfLoader.load("/models/1/1.glb", (glb) => {
       uniforms: {
         u_color_1: { value: new THREE.Color(firstModelColor1) },
         u_color_2: { value: new THREE.Color(firstModelColor2) },
-        u_scale: { value: 1.0 }
+        u_scale: { value: 0.0 }
       },
       depthTest: false,
       blending: THREE.AdditiveBlending,
@@ -140,7 +141,7 @@ gltfLoader.load("/models/1/2.glb", (glb) => {
       uniforms: {
         u_color_1: { value: new THREE.Color(secondModelColor1) },
         u_color_2: { value: new THREE.Color(secondModelColor2) },
-        u_scale: { value: 1.0 }
+        u_scale: { value: 0.0 }
       },
       depthTest: false,
       blending: THREE.AdditiveBlending,
@@ -157,12 +158,32 @@ gltfLoader.load("/models/1/2.glb", (glb) => {
 
 //buttons listeners
 buttons[0].addEventListener("click", () => {
+  gsap.to(modelArray[0].children[0].material.uniforms.u_scale, {
+    value: 1.0,
+    duration: 1,
+  })
+  gsap.to(modelArray[1].children[0].material.uniforms.u_scale, {
+    value: 0.0,
+    duration: 1,
+    onComplete: () => {
+      scene.remove(modelArray[1])
+    }
+  })
   scene.add(modelArray[0])
-  scene.remove(modelArray[1])
 })
 buttons[1].addEventListener("click", () => {
+  gsap.to(modelArray[1].children[0].material.uniforms.u_scale, {
+    value: 1.0,
+    duration: 1,
+  })
+  gsap.to(modelArray[0].children[0].material.uniforms.u_scale, {
+    value: 0.0,
+    duration: 1,
+    onComplete: () => {
+      scene.remove(modelArray[0])
+    }
+  })
   scene.add(modelArray[1])
-  scene.remove(modelArray[0])
 })
 
 
