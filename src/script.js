@@ -151,6 +151,19 @@ gltfLoader.load("/models/1/2.glb", (glb) => {
   glb.scene.children[0].rotation.z = -Math.PI / 2.0;
   modelArray[1] = glb.scene
 })
+
+
+//buttons listeners
+buttons[0].addEventListener("click", () => {
+  scene.add(modelArray[0])
+  scene.remove(modelArray[1])
+})
+buttons[1].addEventListener("click", () => {
+  scene.add(modelArray[1])
+  scene.remove(modelArray[0])
+})
+
+
 //OrbitControl
 const orbitControls = new OrbitControls(camera, canvas);
 orbitControls.enableDamping = true;
