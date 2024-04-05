@@ -63,8 +63,9 @@ gltfLoader.load("/models/1/1.glb", (glb) => {
   //change model into particles
   glb.scene.children[0] = new THREE.Points(
     glb.scene.children[0].geometry,
-    new THREE.PointsMaterial({
-      size: 0.03,
+    new THREE.RawShaderMaterial({
+      vertexShader: vShader,
+      fragmentShader: fShader,
     })
   )
 
