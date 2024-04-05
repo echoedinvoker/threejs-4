@@ -96,6 +96,7 @@ gltfLoader.load("/models/1/1.glb", (glb) => {
       uniforms: {
         u_color_1: { value: new THREE.Color(firstModelColor1) },
         u_color_2: { value: new THREE.Color(firstModelColor2) },
+        u_scale: { value: 1.0 }
       },
       depthTest: false,
       blending: THREE.AdditiveBlending,
@@ -139,6 +140,7 @@ gltfLoader.load("/models/1/2.glb", (glb) => {
       uniforms: {
         u_color_1: { value: new THREE.Color(secondModelColor1) },
         u_color_2: { value: new THREE.Color(secondModelColor2) },
+        u_scale: { value: 1.0 }
       },
       depthTest: false,
       blending: THREE.AdditiveBlending,
