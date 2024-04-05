@@ -73,6 +73,8 @@ gltfLoader.load("/models/1/1.glb", (glb) => {
         u_color_1: { value: new THREE.Color(firstModelColor1) },
         u_color_2: { value: new THREE.Color(firstModelColor2) },
       },
+      depthTest: false,
+      blending: THREE.AdditiveBlending,
     })
   )
 
