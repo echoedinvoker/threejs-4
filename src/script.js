@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import { MeshSurfaceSampler } from "three/examples/jsm/math/MeshSurfaceSampler";
 import vShader from "./shaders/vertex.glsl";
 import fShader from "./shaders/fragment.glsl";
 
@@ -63,9 +64,29 @@ const firstModelColor2 = 'yellow'
 //1)
 gltfLoader.load("/models/1/1.glb", (glb) => {
 
+  //increase the number of particles
+  const samplerMesh = new MeshSurfaceSampler(glb.scene.children[0]).build();
+  const numParticles = 20000;
+  const particlesGeometry = new THREE.BufferGeometry();
+  const particlesArray = new Float32Array(numParticles * 3);
+  for (let i = 0; i < numParticles; i++) {
+    const position = new THREE.Vector3();
+    samplerMesh.sample(position);
+    particlesArray.set(
+      [position.x, position.y, position.z],
+      i * 3
+    )
+  }
+  particlesGeometry.setAttribute(
+    'position',
+    new THREE.BufferAttribute(particlesArray, 3)
+  )
+
+
   //change model into particles
   glb.scene.children[0] = new THREE.Points(
-    glb.scene.children[0].geometry,
+    // glb.scene.children[0].geometry,
+    particlesGeometry,
     new THREE.RawShaderMaterial({
       vertexShader: vShader,
       fragmentShader: fShader,
