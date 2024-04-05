@@ -56,6 +56,12 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setClearColor("#27282c", 1.0);
 renderer.setSize(aspect.width, aspect.height);
 
+//Loading Models
+//1)
+gltfLoader.load("/models/1/1.glb", (glb) => {
+  scene.add(glb.scene)
+})
+
 //OrbitControl
 const orbitControls = new OrbitControls(camera, canvas);
 orbitControls.enableDamping = true;
