@@ -56,6 +56,9 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setClearColor("#27282c", 1.0);
 renderer.setSize(aspect.width, aspect.height);
 
+const firstModelColor1 = 'red'
+const firstModelColor2 = 'yellow'
+
 //Loading Models
 //1)
 gltfLoader.load("/models/1/1.glb", (glb) => {
@@ -66,6 +69,10 @@ gltfLoader.load("/models/1/1.glb", (glb) => {
     new THREE.RawShaderMaterial({
       vertexShader: vShader,
       fragmentShader: fShader,
+      uniforms: {
+        u_color_1: { value: new THREE.Color(firstModelColor1) },
+        u_color_2: { value: new THREE.Color(firstModelColor2) },
+      },
     })
   )
 

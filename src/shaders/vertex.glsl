@@ -4,6 +4,8 @@ uniform mat4 projectionMatrix;
 
 attribute vec3 position;
 
+varying vec3 v_position;
+
 void main() {
    vec4 modelPosition = modelMatrix * vec4(position,1.0);
    vec4 viewPosition = viewMatrix * modelPosition;
@@ -11,4 +13,6 @@ void main() {
 
    gl_Position = projectionPosition;
    gl_PointSize = 1.0;
+
+   v_position = position;
 }
