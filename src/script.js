@@ -59,6 +59,15 @@ renderer.setSize(aspect.width, aspect.height);
 //Loading Models
 //1)
 gltfLoader.load("/models/1/1.glb", (glb) => {
+
+  //change model into particles
+  glb.scene.children[0] = new THREE.Points(
+    glb.scene.children[0].geometry,
+    new THREE.PointsMaterial({
+      size: 0.03,
+    })
+  )
+
   glb.scene.children[0].scale.set(0.5, 0.5, 0.5);
   glb.scene.children[0].position.x = 0.5;
   glb.scene.children[0].rotation.y = Math.PI / 2;
